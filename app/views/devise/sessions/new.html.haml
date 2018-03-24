@@ -1,0 +1,25 @@
+.limiter
+  .container-login100
+    .wrap-login100
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'login100-form validate-form'} ) do |f|
+        %span.login100-form-title.p-b-26
+          Welcome
+        %span.login100-form-title.p-b-48
+          %i.zmdi.zmdi-font
+        .wrap-input100.validate-input{"data-validate" => "Valid email is: a@b.c"}
+          = f.email_field :email, class: 'input100'
+          %span.focus-input100{"data-placeholder" => "Email"}
+        .wrap-input100.validate-input{"data-validate" => "Enter password"}
+          %span.btn-show-pass
+            %i.zmdi.zmdi-eye
+          = f.password_field :password, class: 'input100'
+          %span.focus-input100{"data-placeholder" => "Password"}
+        .container-login100-form-btn
+          .wrap-login100-form-btn
+            .login100-form-bgbtn
+            %button.login100-form-btn
+              Login
+        .text-center.p-t-115
+          %span.txt1
+            Don’t have an account?
+          = link_to 'Sign Up', new_user_registration_path, class: 'txt2'
