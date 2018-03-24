@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
   end
 
+  def set_gon
+    gon.csrf_token = form_authenticity_token
+    gon.user_id = current_user.id
+    gon.cluster = ENV['PUSHER_CLUSTER']
+  end
+
 end
