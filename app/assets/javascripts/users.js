@@ -22,12 +22,20 @@ $(document).ready(function () {
 
   $('.user').on('click', function () {
     $('.user').removeClass('active');
-    $(this).addClass('active')
+    var user = $(this);
+    user.addClass('active');
+    $('.heading-name-meta').text(user.data('nickname'));
+    $.ajax({
+      url: Routes.chatter_path(user.data('user-id'), {format: 'js'}),
+      headers: {
+        'X_CSRF_TOKEN': gon.csrf_token
+      }
+    });
   });
 
   $('.reply-send').on('click',function () {
     $.ajax({
-      url: gon.create_chat_url,
+      url: Routes.chatters_path(),
       headers: {
         'X_CSRF_TOKEN': gon.csrf_token
       },

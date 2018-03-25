@@ -33,6 +33,7 @@ gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'pusher'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'gon'
+gem 'js-routes'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

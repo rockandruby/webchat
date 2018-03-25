@@ -13,7 +13,7 @@
               %span.glyphicon.glyphicon-search.form-control-feedback
         .row.sideBar
           - @users.each_with_index do |u, i|
-            .row.user.sideBar-body{class: "#{'active' if i.zero? }", data: {user_id: u.id}}
+            .row.user.sideBar-body{class: "#{'active' if i.zero? }", data: {user_id: u.id, nickname: u.nickname}}
               .col-sm-3.col-xs-3.sideBar-avatar
                 .avatar-icon
                   %img{:src => "https://bootdey.com/img/Content/avatar/avatar1.png"}/
@@ -26,34 +26,17 @@
                       18:18
     .col-sm-8.conversation
       .row.heading
-        .col-sm-2.col-md-1.col-xs-3.heading-avatar
-          .heading-avatar-icon
-            %img{:src => "https://bootdey.com/img/Content/avatar/avatar6.png"}/
-        .col-sm-8.col-xs-7.heading-name
-          %a.heading-name-meta
-            John Doe
-          %span.heading-online Online
+        - if @users.any?
+          .col-sm-2.col-md-1.col-xs-3.heading-avatar
+            .heading-avatar-icon
+              %img{:src => "https://bootdey.com/img/Content/avatar/avatar6.png"}/
+          .col-sm-8.col-xs-7.heading-name
+            %span.heading-name-meta= @users.first.nickname
+            %span.heading-online Online
       #conversation.row.message
-        .row.message-previous
-          .col-sm-12.previous
-            %a#ankitjain28{:name => "20", :onclick => "previous(this)"}
-              Show Previous Message!
         - if @chat
           - @chat.messages.each do |m|
-            - if m.author != current_user
-              .row.message-body
-                .col-sm-12.message-main-receiver
-                  .receiver
-                    .message-text= m.text
-                    %span.message-time.pull-right
-                      Sun
-            - else
-              .row.message-body
-                .col-sm-12.message-main-sender
-                  .sender
-                    .message-text= m.text
-                    %span.message-time.pull-right
-                      Sun
+            = render 'chatters/message', message: m
       .row.reply
         .col-sm-1.col-xs-1.reply-emojis
           %i.fa.fa-smile-o.fa-2x
