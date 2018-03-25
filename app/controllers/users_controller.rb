@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.where('id != ?', current_user.id)
-
+    @chat = Chatter.get_chat(current_user.id, @users.last.id) if @users.any?
   end
 
   def pusher_auth

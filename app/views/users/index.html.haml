@@ -38,20 +38,20 @@
           .col-sm-12.previous
             %a#ankitjain28{:name => "20", :onclick => "previous(this)"}
               Show Previous Message!
-        .row.message-body
-          .col-sm-12.message-main-receiver
-            .receiver
-              .message-text
-                Hi, what are you doing?!
-              %span.message-time.pull-right
-                Sun
-        .row.message-body
-          .col-sm-12.message-main-sender
-            .sender
-              .message-text
-                I am doing nothing man!
-              %span.message-time.pull-right
-                Sun
+        - if @chat
+          - @chat.messages.each do |m|
+            .row.message-body
+              .col-sm-12.message-main-receiver
+                .receiver
+                  .message-text= m.text
+                  %span.message-time.pull-right
+                    Sun
+            .row.message-body
+              .col-sm-12.message-main-sender
+                .sender
+                  .message-text= m.text
+                  %span.message-time.pull-right
+                    Sun
       .row.reply
         .col-sm-1.col-xs-1.reply-emojis
           %i.fa.fa-smile-o.fa-2x
