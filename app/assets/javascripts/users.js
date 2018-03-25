@@ -19,8 +19,24 @@ privateChannel.bind('pusher:subscription_error', function(status) {
 });
 
 $(document).ready(function () {
+
   $('.user').on('click', function () {
     $('.user').removeClass('active');
     $(this).addClass('active')
+  });
+
+  $('.reply-send').on('click',function () {
+    $.ajax({
+      url: gon.create_chat_url,
+      headers: {
+        'X_CSRF_TOKEN': gon.csrf_token
+      },
+      method: 'POST',
+      data: {user_id: $('.active').data('user-id'), message: $('#comment').val()},
+      success: function(data){
+        $('#comment').val('')
+      }
+    });
   })
+
 });

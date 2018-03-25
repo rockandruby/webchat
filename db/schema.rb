@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180324083438) do
+ActiveRecord::Schema.define(version: 20180325073121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chatters", force: :cascade do |t|
+    t.bigint "creator_id"
+    t.bigint "receiver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id", "receiver_id"], name: "index_chatters_on_creator_id_and_receiver_id", unique: true
+    t.index ["creator_id"], name: "index_chatters_on_creator_id"
+    t.index ["receiver_id", "creator_id"], name: "index_chatters_on_receiver_id_and_creator_id", unique: true
+    t.index ["receiver_id"], name: "index_chatters_on_receiver_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "author_id"
+    t.bigint "chatter_id"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_messages_on_author_id"
+    t.index ["chatter_id"], name: "index_messages_on_chatter_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "nickname", default: "", null: false

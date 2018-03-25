@@ -6,10 +6,6 @@
           .col-sm-3.col-xs-3.heading-avatar
             .heading-avatar-icon
               %img{:src => "https://bootdey.com/img/Content/avatar/avatar1.png"}/
-          .col-sm-1.col-xs-1.heading-dot.pull-right
-            %i.fa.fa-ellipsis-v.fa-2x.pull-right{"aria-hidden" => "true"}
-          .col-sm-2.col-xs-2.heading-compose.pull-right
-            %i.fa.fa-comments.fa-2x.pull-right{"aria-hidden" => "true"}
         .row.searchBox
           .col-sm-12.searchBox-inner
             .form-group.has-feedback
@@ -17,7 +13,7 @@
               %span.glyphicon.glyphicon-search.form-control-feedback
         .row.sideBar
           - @users.each_with_index do |u, i|
-            .row.user.sideBar-body{class: "#{'active' if i.zero? }"}
+            .row.user.sideBar-body{class: "#{'active' if i.zero? }", data: {user_id: u.id}}
               .col-sm-3.col-xs-3.sideBar-avatar
                 .avatar-icon
                   %img{:src => "https://bootdey.com/img/Content/avatar/avatar1.png"}/
@@ -28,139 +24,6 @@
                   .col-sm-4.col-xs-4.pull-right.sideBar-time
                     %span.time-meta.pull-right
                       18:18
-      .side-two
-        .row.newMessage-heading
-          .row.newMessage-main
-            .col-sm-2.col-xs-2.newMessage-back
-              %i.fa.fa-arrow-left{"aria-hidden" => "true"}
-            .col-sm-10.col-xs-10.newMessage-title
-              New Chat
-        .row.composeBox
-          .col-sm-12.composeBox-inner
-            .form-group.has-feedback
-              %input#composeText.form-control{:name => "searchText", :placeholder => "Search People", :type => "text"}/
-              %span.glyphicon.glyphicon-search.form-control-feedback
-        .row.compose-sideBar
-          .row.sideBar-body
-            .col-sm-3.col-xs-3.sideBar-avatar
-              .avatar-icon
-                %img{:src => "https://bootdey.com/img/Content/avatar/avatar1.png"}/
-            .col-sm-9.col-xs-9.sideBar-main
-              .row
-                .col-sm-8.col-xs-8.sideBar-name
-                  %span.name-meta
-                    John Doe
-                .col-sm-4.col-xs-4.pull-right.sideBar-time
-                  %span.time-meta.pull-right
-                    18:18
-          .row.sideBar-body
-            .col-sm-3.col-xs-3.sideBar-avatar
-              .avatar-icon
-                %img{:src => "https://bootdey.com/img/Content/avatar/avatar2.png"}/
-            .col-sm-9.col-xs-9.sideBar-main
-              .row
-                .col-sm-8.col-xs-8.sideBar-name
-                  %span.name-meta
-                    John Doe
-                .col-sm-4.col-xs-4.pull-right.sideBar-time
-                  %span.time-meta.pull-right
-                    18:18
-          .row.sideBar-body
-            .col-sm-3.col-xs-3.sideBar-avatar
-              .avatar-icon
-                %img{:src => "https://bootdey.com/img/Content/avatar/avatar3.png"}/
-            .col-sm-9.col-xs-9.sideBar-main
-              .row
-                .col-sm-8.col-xs-8.sideBar-name
-                  %span.name-meta
-                    John Doe
-                .col-sm-4.col-xs-4.pull-right.sideBar-time
-                  %span.time-meta.pull-right
-                    18:18
-          .row.sideBar-body
-            .col-sm-3.col-xs-3.sideBar-avatar
-              .avatar-icon
-                %img{:src => "https://bootdey.com/img/Content/avatar/avatar4.png"}/
-            .col-sm-9.col-xs-9.sideBar-main
-              .row
-                .col-sm-8.col-xs-8.sideBar-name
-                  %span.name-meta
-                    John Doe
-                .col-sm-4.col-xs-4.pull-right.sideBar-time
-                  %span.time-meta.pull-right
-                    18:18
-          .row.sideBar-body
-            .col-sm-3.col-xs-3.sideBar-avatar
-              .avatar-icon
-                %img{:src => "https://bootdey.com/img/Content/avatar/avatar5.png"}/
-            .col-sm-9.col-xs-9.sideBar-main
-              .row
-                .col-sm-8.col-xs-8.sideBar-name
-                  %span.name-meta
-                    John Doe
-                .col-sm-4.col-xs-4.pull-right.sideBar-time
-                  %span.time-meta.pull-right
-                    18:18
-          .row.sideBar-body
-            .col-sm-3.col-xs-3.sideBar-avatar
-              .avatar-icon
-                %img{:src => "https://bootdey.com/img/Content/avatar/avatar6.png"}/
-            .col-sm-9.col-xs-9.sideBar-main
-              .row
-                .col-sm-8.col-xs-8.sideBar-name
-                  %span.name-meta
-                    John Doe
-                .col-sm-4.col-xs-4.pull-right.sideBar-time
-                  %span.time-meta.pull-right
-                    18:18
-          .row.sideBar-body
-            .col-sm-3.col-xs-3.sideBar-avatar
-              .avatar-icon
-                %img{:src => "https://bootdey.com/img/Content/avatar/avatar2.png"}/
-            .col-sm-9.col-xs-9.sideBar-main
-              .row
-                .col-sm-8.col-xs-8.sideBar-name
-                  %span.name-meta
-                    John Doe
-                .col-sm-4.col-xs-4.pull-right.sideBar-time
-                  %span.time-meta.pull-right
-                    18:18
-          .row.sideBar-body
-            .col-sm-3.col-xs-3.sideBar-avatar
-              .avatar-icon
-                %img{:src => "https://bootdey.com/img/Content/avatar/avatar3.png"}/
-            .col-sm-9.col-xs-9.sideBar-main
-              .row
-                .col-sm-8.col-xs-8.sideBar-name
-                  %span.name-meta
-                    John Doe
-                .col-sm-4.col-xs-4.pull-right.sideBar-time
-                  %span.time-meta.pull-right
-                    18:18
-          .row.sideBar-body
-            .col-sm-3.col-xs-3.sideBar-avatar
-              .avatar-icon
-                %img{:src => "https://bootdey.com/img/Content/avatar/avatar4.png"}/
-            .col-sm-9.col-xs-9.sideBar-main
-              .row
-                .col-sm-8.col-xs-8.sideBar-name
-                  %span.name-meta
-                    John Doe
-                .col-sm-4.col-xs-4.pull-right.sideBar-time
-                  %span.time-meta.pull-right
-                    18:18
-          .row.sideBar-body
-            .col-sm-3.col-xs-3.sideBar-avatar
-              .avatar-icon
-                %img{:src => "https://bootdey.com/img/Content/avatar/avatar5.png"}/
-            .col-sm-9.col-xs-9.sideBar-main
-              .row
-                .col-sm-8.col-xs-8.sideBar-name
-                  %span.name-meta
-                    John Doe
-                .col-sm-4.col-xs-4.pull-right.sideBar-time
-                  %span.time-meta.pull-right
-                    18:18
     .col-sm-8.conversation
       .row.heading
         .col-sm-2.col-md-1.col-xs-3.heading-avatar
@@ -170,8 +33,6 @@
           %a.heading-name-meta
             John Doe
           %span.heading-online Online
-        .col-sm-1.col-xs-1.heading-dot.pull-right
-          %i.fa.fa-ellipsis-v.fa-2x.pull-right{"aria-hidden" => "true"}
       #conversation.row.message
         .row.message-previous
           .col-sm-12.previous
@@ -200,17 +61,3 @@
           %i.fa.fa-microphone.fa-2x{"aria-hidden" => "true"}
         .col-sm-1.col-xs-1.reply-send
           %i.fa.fa-send.fa-2x{"aria-hidden" => "true"}
-  :javascript
-      $(function(){
-          $(".heading-compose").click(function() {
-            $(".side-two").css({
-              "left": "0"
-            });
-          });
-
-          $(".newMessage-back").click(function() {
-            $(".side-two").css({
-              "left": "-100%"
-            });
-          });
-      })

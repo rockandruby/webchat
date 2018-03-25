@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'users#index'
   post '/pusher/auth/:id' => 'users#pusher_auth'
+  resources :chatters, only: [:create]
 end
