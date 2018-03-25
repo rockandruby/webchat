@@ -3,7 +3,16 @@ class ChattersController < ApplicationController
 
   def create
     chat = Chatter.get_chat(current_user.id, params[:user_id]) || Chatter.create!(creator: current_user, receiver: User.find(params[:user_id]))
-    chat.messages.create!(text: params[:message], author: current_user)
+    message = chat.messages.create!(text: params[:message], author: current_user)
+    channels = ["private-notifications_user_#{params[:user_id]}", "private-notifications_user_#{current_user.id}"]
+    data = {
+        message: params[:message],
+        sender: current_user.id,
+        receiver: params[:user_id],
+        created_at: message.created_at.time.to_formatted_s(:short)
+    }
+    message.created_at.time.to_formatted_s(:short)
+    Pusher.trigger(channels, 'receive_message', data)
   end
 
   def show

@@ -1,6 +1,5 @@
-var pusher = new Pusher('0fa6459464e50332b8b5', {
+var pusher = new Pusher(gon.pusher_key, {
   cluster: gon.cluster,
-  authEndpoint: '/pusher/auth/' + gon.user_id,
   auth: {
     headers: {
       'X-CSRF-Token': gon.csrf_token
@@ -8,14 +7,50 @@ var pusher = new Pusher('0fa6459464e50332b8b5', {
   }
 });
 
-var privateChannel = pusher.subscribe('private-notifications_user_' + gon.user_id);
+var userNotificationsChannel = pusher.subscribe('private-notifications_user_' + gon.user_id);
+var usersPresenceChannel = pusher.subscribe('presence-users');
 
-privateChannel.bind('pusher:subscription_succeeded', function() {
+// System events
+
+userNotificationsChannel.bind('pusher:subscription_succeeded', function() {
   console.log('Subscribed to private channel!')
 });
 
-privateChannel.bind('pusher:subscription_error', function(status) {
+userNotificationsChannel.bind('pusher:subscription_error', function(status) {
   console.log(status)
+});
+
+usersPresenceChannel.bind('pusher:subscription_succeeded', function() {
+  console.log('Subscribed to presence channel!')
+});
+
+usersPresenceChannel.bind('pusher:subscription_error', function(status) {
+  console.log(status)
+});
+
+usersPresenceChannel.bind('pusher:member_added', function(member) {
+  console.log(member)
+});
+
+// App events
+
+userNotificationsChannel.bind('receive_message', function(data) {
+  var user = $('.active');
+  if(user.data('user-id') == data.sender || user.data('user-id') == data.receiver){
+    var message = $('.message-body.hide').clone();
+    message.removeClass('hide');
+    message.find('.message-text').text(data.message);
+    message.find('.message-time').text(data.created_at);
+    if(data.receiver == gon.user_id){
+      message.find('.col-sm-12').addClass('message-main-receiver');
+      message.find('.status').addClass('receiver')
+    }else{
+      message.find('.col-sm-12').addClass('message-main-sender');
+      message.find('.status').addClass('sender')
+    }
+    $('#conversation').append(message)
+  }
+
 });
 
 $(document).ready(function () {

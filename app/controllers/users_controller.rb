@@ -8,10 +8,16 @@ class UsersController < ApplicationController
   end
 
   def pusher_auth
-    if params[:id].to_i == current_user.id
-      response = Pusher.authenticate(params[:channel_name], params[:socket_id])
-      return render json: response
+    case params[:channel_name]
+      when "private-notifications_user_#{current_user.id}"
+        render json: Pusher.authenticate(params[:channel_name], params[:socket_id])
+      when "presence-users"
+        render json: Pusher.authenticate(params[:channel_name], params[:socket_id], user_id: current_user.id, user_info: {
+            nickname: current_user.nickname
+        })
+      else
+        head 403
     end
-    head 403
   end
+
 end
