@@ -17,3 +17,10 @@ privateChannel.bind('pusher:subscription_succeeded', function() {
 privateChannel.bind('pusher:subscription_error', function(status) {
   console.log(status)
 });
+
+$(document).ready(function () {
+  $('.user').on('click', function () {
+    $('.user').removeClass('active');
+    $(this).addClass('active')
+  })
+});

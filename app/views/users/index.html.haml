@@ -16,8 +16,8 @@
               %input#searchText.form-control{:name => "searchText", :placeholder => "Search", :type => "text"}/
               %span.glyphicon.glyphicon-search.form-control-feedback
         .row.sideBar
-          - @users.each do |u|
-            .row.sideBar-body
+          - @users.each_with_index do |u, i|
+            .row.user.sideBar-body{class: "#{'active' if i.zero? }"}
               .col-sm-3.col-xs-3.sideBar-avatar
                 .avatar-icon
                   %img{:src => "https://bootdey.com/img/Content/avatar/avatar1.png"}/
