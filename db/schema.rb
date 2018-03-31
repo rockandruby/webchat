@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20180325073121) do
   create_table "messages", force: :cascade do |t|
     t.bigint "author_id"
     t.bigint "chatter_id"
+    t.boolean "is_read", default: false
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

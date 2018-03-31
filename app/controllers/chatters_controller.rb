@@ -18,7 +18,11 @@ class ChattersController < ApplicationController
   def show
     respond_to do |format|
       format.js do
-        @messages = Chatter.get_chat(current_user.id, params[:id]).try(:messages) || []
+        chat = Chatter.get_chat(current_user.id, params[:id])
+        return @messages = [] unless chat
+        ActiveRecord::Base.connection.execute("update messages set is_read = true where chatter_id = #{chat.id}
+        and author_id != #{current_user.id} and is_read=false")
+        @messages = chat.messages
       end
     end
   end

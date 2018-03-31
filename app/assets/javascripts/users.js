@@ -42,7 +42,8 @@ usersPresenceChannel.bind('pusher:member_removed', function(member) {
 // App events
 
 userNotificationsChannel.bind('receive_message', function(data) {
-  var user = $('.active');
+  var user = $('.active'),
+      sender = $('[data-user-id = '+ data.sender +']');
   if(user.data('user-id') == data.sender || user.data('user-id') == data.receiver){
     var message = $('.message-body.hide').clone();
     message.removeClass('hide');
@@ -57,6 +58,9 @@ userNotificationsChannel.bind('receive_message', function(data) {
     }
     $('#conversation').append(message)
   }
+  if(data.sender != gon.user_id && !sender.hasClass('active')){
+    sender.addClass('new_message')
+  }
 
 });
 
@@ -69,7 +73,7 @@ $(document).ready(function () {
   }).discover();
 
   $('.user').on('click', function () {
-    $('.user').removeClass('active');
+    $('.user').removeClass('active new_message');
     var user = $(this);
     user.addClass('active');
     $('.heading-name-meta').text(user.data('nickname'));

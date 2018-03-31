@@ -3,9 +3,13 @@
     .col-sm-4.side
       .side-one
         .row.heading
-          .col-sm-3.col-xs-3.heading-avatar
+          .col-sm-9.col-xs-9.heading-avatar
             .heading-avatar-icon
               %img{:src => "https://bootdey.com/img/Content/avatar/avatar1.png"}/
+              %strong= current_user.nickname
+          .col-sm-2.col-xs-2.col-sm-offset-1
+            =link_to destroy_user_session_path, method: :delete do
+              %i.fa.fa-2x.fa-sign-out{"aria-hidden" => "true"}
         .row.searchBox
           .col-sm-12.searchBox-inner
             .form-group.has-feedback
@@ -13,7 +17,7 @@
               %span.glyphicon.glyphicon-search.form-control-feedback
         .row.sideBar
           - @users.each_with_index do |u, i|
-            .row.user.sideBar-body{class: "#{'active' if i.zero? }", data: {user_id: u.id, nickname: u.nickname}}
+            .row.user.sideBar-body{class: [('active' if i.zero?), ('new_message' if @new_senders.include?(u.id))], data: {user_id: u.id, nickname: u.nickname}}
               .col-sm-3.col-xs-3.sideBar-avatar
                 .avatar-icon
                   %img{:src => "https://bootdey.com/img/Content/avatar/avatar1.png"}/
@@ -39,10 +43,8 @@
           - @chat.messages.each do |m|
             = render 'chatters/message', message: m
       .row.reply
-        .col-sm-10.col-xs-10.reply-main.lead.emoji-picker-container
+        .col-sm-11.col-xs-11.reply-main.lead.emoji-picker-container
           %textarea#message.form-control{:rows => "1", data: {emojiable: "true"}}
-        .col-sm-1.col-xs-1.reply-recording
-          %i.fa.fa-microphone.fa-2x{"aria-hidden" => "true"}
         .col-sm-1.col-xs-1.reply-send
           %i.fa.fa-send.fa-2x{"aria-hidden" => "true"}
 

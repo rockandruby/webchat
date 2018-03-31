@@ -5,6 +5,9 @@ class UsersController < ApplicationController
   def index
     @users = User.where('id != ?', current_user.id).order(id: :asc)
     @chat = Chatter.get_chat(current_user.id, @users.first.id) if @users.any?
+    @new_senders = ActiveRecord::Base.connection.execute("select distinct author_id from messages where chatter_id in
+     (select id from chatters where creator_id = #{current_user.id} or receiver_id = #{current_user.id})
+     and author_id != #{current_user.id} and is_read=false").pluck('author_id')
   end
 
   def pusher_auth
