@@ -21,7 +21,10 @@ userNotificationsChannel.bind('pusher:subscription_error', function(status) {
 });
 
 usersPresenceChannel.bind('pusher:subscription_succeeded', function() {
-  console.log('Subscribed to presence channel!')
+  console.log('Subscribed to presence channel!');
+  usersPresenceChannel.members.each(function(member) {
+    $('[data-user-id = '+ member.id +']').find('.status').addClass('online')
+  });
 });
 
 usersPresenceChannel.bind('pusher:subscription_error', function(status) {
@@ -29,7 +32,11 @@ usersPresenceChannel.bind('pusher:subscription_error', function(status) {
 });
 
 usersPresenceChannel.bind('pusher:member_added', function(member) {
-  console.log(member)
+  $('[data-user-id = '+ member.id +']').find('.status').addClass('online')
+});
+
+usersPresenceChannel.bind('pusher:member_removed', function(member) {
+  $('[data-user-id = '+ member.id +']').find('.status').removeClass('online')
 });
 
 // App events
@@ -69,15 +76,17 @@ $(document).ready(function () {
   });
 
   $('.reply-send').on('click',function () {
+    var message = $('#message').val();
+    if(message.length < 1) return;
     $.ajax({
       url: Routes.chatters_path(),
       headers: {
         'X_CSRF_TOKEN': gon.csrf_token
       },
       method: 'POST',
-      data: {user_id: $('.active').data('user-id'), message: $('#comment').val()},
+      data: {user_id: $('.active').data('user-id'), message: message},
       success: function(data){
-        $('#comment').val('')
+        $('#message').val('')
       }
     });
   })

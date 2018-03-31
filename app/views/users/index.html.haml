@@ -21,6 +21,7 @@
                 .row
                   .col-sm-8.col-xs-8.sideBar-name
                     %span.name-meta= u.nickname
+                    .status
                   .col-sm-4.col-xs-4.pull-right.sideBar-time
                     %span.time-meta.pull-right
                       18:18
@@ -41,7 +42,7 @@
         .col-sm-1.col-xs-1.reply-emojis
           %i.fa.fa-smile-o.fa-2x
         .col-sm-9.col-xs-9.reply-main
-          %textarea#comment.form-control{:rows => "1"}
+          %textarea#message.form-control{:rows => "1"}
         .col-sm-1.col-xs-1.reply-recording
           %i.fa.fa-microphone.fa-2x{"aria-hidden" => "true"}
         .col-sm-1.col-xs-1.reply-send

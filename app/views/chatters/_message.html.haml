@@ -3,10 +3,10 @@
     .col-sm-12.message-main-receiver
       .receiver
         .message-text= message.text
-        %span.message-time.pull-right= message.created_at.time.to_formatted_s(:short)
+        %span.message-time.pull-right= message.created_at.localtime.to_formatted_s(:short)
 - else
   .row.message-body
     .col-sm-12.message-main-sender
       .sender
         .message-text= message.text
-        %span.message-time.pull-right= message.created_at.time.to_formatted_s(:short)
+        %span.message-time.pull-right= message.created_at.localtime.to_formatted_s(:short)
