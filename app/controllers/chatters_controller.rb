@@ -6,7 +6,7 @@ class ChattersController < ApplicationController
     message = chat.messages.create!(text: params[:message], author: current_user)
     channels = ["private-notifications_user_#{params[:user_id]}", "private-notifications_user_#{current_user.id}"]
     data = {
-        message: params[:message],
+        message: helpers.sanitize(helpers.content_with_emoji(params[:message])),
         sender: current_user.id,
         receiver: params[:user_id],
         created_at: message.created_at.time.to_formatted_s(:short)

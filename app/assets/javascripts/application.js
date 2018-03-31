@@ -13,5 +13,9 @@
 //= require rails-ujs
 //= require jquery
 //= require bootstrap-sprockets
+//= require emoji/emoji-picker
+//= require emoji/config
+//= require emoji/util
+//= require emoji/jquery.emojiarea
 //= require js-routes
 //= require users

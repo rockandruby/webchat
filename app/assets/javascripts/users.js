@@ -46,7 +46,7 @@ userNotificationsChannel.bind('receive_message', function(data) {
   if(user.data('user-id') == data.sender || user.data('user-id') == data.receiver){
     var message = $('.message-body.hide').clone();
     message.removeClass('hide');
-    message.find('.message-text').text(data.message);
+    message.find('.message-text').html(data.message);
     message.find('.message-time').text(data.created_at);
     if(data.receiver == gon.user_id){
       message.find('.col-sm-12').addClass('message-main-receiver');
@@ -61,6 +61,12 @@ userNotificationsChannel.bind('receive_message', function(data) {
 });
 
 $(document).ready(function () {
+
+  new EmojiPicker({
+    emojiable_selector: '[data-emojiable=true]',
+    assetsPath: 'emoji',
+    popupButtonClasses: 'fa fa-smile-o'
+  }).discover();
 
   $('.user').on('click', function () {
     $('.user').removeClass('active');
@@ -86,7 +92,7 @@ $(document).ready(function () {
       method: 'POST',
       data: {user_id: $('.active').data('user-id'), message: message},
       success: function(data){
-        $('#message').val('')
+        $('.emoji-wysiwyg-editor').html('')
       }
     });
   })

@@ -39,10 +39,8 @@
           - @chat.messages.each do |m|
             = render 'chatters/message', message: m
       .row.reply
-        .col-sm-1.col-xs-1.reply-emojis
-          %i.fa.fa-smile-o.fa-2x
-        .col-sm-9.col-xs-9.reply-main
-          %textarea#message.form-control{:rows => "1"}
+        .col-sm-10.col-xs-10.reply-main.lead.emoji-picker-container
+          %textarea#message.form-control{:rows => "1", data: {emojiable: "true"}}
         .col-sm-1.col-xs-1.reply-recording
           %i.fa.fa-microphone.fa-2x{"aria-hidden" => "true"}
         .col-sm-1.col-xs-1.reply-send
