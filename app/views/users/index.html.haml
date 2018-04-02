@@ -4,7 +4,7 @@
       .side-one
         .row.heading
           .col-sm-9.col-xs-9.heading-avatar
-            .heading-avatar-icon
+            .heading-avatar-icon{title: 'Click your avatar to upload'}
               = file_field_tag 'avatar', id: 'avatar', style: 'display: none', data: {url: user_path(current_user)}, multiple: true
               = image_tag current_user.avatar.url, id: 'user_avatar'
               %strong= current_user.nickname

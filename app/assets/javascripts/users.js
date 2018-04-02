@@ -91,7 +91,7 @@ $(document).ready(function () {
       'X-CSRF-TOKEN': gon.csrf_token
     },
     done: function (e, data) {
-      $('#user_avatar').attr('src', 'https:' + data.result.avatar)
+      $('#user_avatar').attr('src', data.result.avatar)
     }
   });
 
@@ -101,6 +101,7 @@ $(document).ready(function () {
     var user = $(this);
     user.addClass('active');
     $('.heading-name-meta').text(user.data('nickname'));
+    $('.conversation .heading-avatar img').attr('src', user.find('.sideBar-avatar img').attr('src'));
     $.ajax({
       url: Routes.chatter_path(user.data('user-id'), {format: 'js'}),
       headers: {
