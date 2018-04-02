@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root 'users#index'
   post '/pusher/auth' => 'users#pusher_auth'
   resources :chatters, only: [:create, :show]
+  resources :users, only: [:update]
 end

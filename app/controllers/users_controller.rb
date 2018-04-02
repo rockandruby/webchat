@@ -10,6 +10,12 @@ class UsersController < ApplicationController
      and author_id != #{current_user.id} and is_read=false").pluck('author_id')
   end
 
+  def update
+    current_user.avatar = nil if current_user.avatar.url.present?
+    current_user.update(avatar: params[:avatar])
+    render json: {avatar: current_user.avatar.url}
+  end
+
   def pusher_auth
     case params[:channel_name]
       when "private-notifications_user_#{current_user.id}"

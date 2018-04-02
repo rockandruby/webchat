@@ -2,4 +2,13 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "emoji";
+@import "jquery.fileupload";
+@import "jquery.fileupload-ui";
 @import "users";
+
+#loading-indicator {
+  position: absolute;
+  left: 43%;
+  top: 40%;
+  z-index: 1;
+}

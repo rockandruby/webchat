@@ -66,11 +66,35 @@ userNotificationsChannel.bind('receive_message', function(data) {
 
 $(document).ready(function () {
 
+  $(document).ajaxSend(function(event, request, settings) {
+    $('#loading-indicator').show();
+  });
+
+  $(document).ajaxComplete(function(event, request, settings) {
+    $('#loading-indicator').hide();
+  });
+
   new EmojiPicker({
     emojiable_selector: '[data-emojiable=true]',
     assetsPath: 'emoji',
     popupButtonClasses: 'fa fa-smile-o'
   }).discover();
+
+  $('#user_avatar').on('click', function () {
+    $('#avatar').click()
+  });
+
+  $('#avatar').fileupload({
+    type: 'PATCH',
+    dataType: 'json',
+    headers: {
+      'X-CSRF-TOKEN': gon.csrf_token
+    },
+    done: function (e, data) {
+      $('#user_avatar').attr('src', 'https:' + data.result.avatar)
+    }
+  });
+
 
   $('.user').on('click', function () {
     $('.user').removeClass('active new_message');

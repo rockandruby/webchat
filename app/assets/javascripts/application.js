@@ -18,4 +18,5 @@
 //= require emoji/util
 //= require emoji/jquery.emojiarea
 //= require js-routes
+//= require jquery-fileupload/basic
 //= require users
