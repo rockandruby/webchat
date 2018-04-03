@@ -66,6 +66,19 @@ userNotificationsChannel.bind('receive_message', function(data) {
 
 $(document).ready(function () {
 
+  $('#searchText').on('input', function (e) {
+    var search = e.target.value,
+        nickname= '';
+    if(e.target.value.length > 1){
+      $('.user').each(function () {
+        nickname = $(this).find('.name-meta').text();
+        if(nickname.toLowerCase().search(search.toLowerCase()) < 0) $(this).hide()
+      })
+    }else {
+      $('.user').show()
+    }
+  });
+
   $(document).ajaxSend(function(event, request, settings) {
     $('#loading-indicator').show();
   });
